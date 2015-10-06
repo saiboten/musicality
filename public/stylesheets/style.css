@@ -1,0 +1,37 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.dropzone {
+    border: 1px dotted black;
+    width: 150px;
+}
+
+.instruments {
+    border: 1px solid black;
+}
+
+.alternative {
+    border: 1px solid black;
+}
+
+.alternativeList {
+    border: 1px solid black;
+}
+
+.part {
+    border: 1px solid black;
+    width: 300px;
+    float: left;
+    height: 600px;
+}
+
+
+.parts {
+    border: 1px solid black;
+}
