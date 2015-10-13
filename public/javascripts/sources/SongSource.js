@@ -1,3 +1,5 @@
+var request = require('superagent');
+
 var mockData = [
     {
         partname: "Introriff!",
@@ -17,14 +19,24 @@ var SongSource = {
     fetch: function () {
         // returning a Promise because that is what fetch does.
         return new Promise(function (resolve, reject) {
-            // simulate an asynchronous action where data is fetched on
-            // a remote server somewhere.
-            setTimeout(function () {
-                // resolve with some mock data
-                resolve(mockData);
-            }, 250);
+            request.get('/song/Awesome').end(function(err, res) {
+                if(err) {
+                    console.log("Nope, something is wrong: ", err);
+                    reject(err);
+                }
+                else {
+                    console.log("Got some data for this song :", res.body);
+                    console.log("It should look like this:", mockData);
+                    resolve(res.body.parts);
+                }
+            });
         });
+    },
+
+    store: function() {
+
     }
 };
+
 
 module.exports = SongSource;
