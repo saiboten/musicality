@@ -6,13 +6,38 @@ var Parts = require('./Parts.jsx');
 
 var Song = React.createClass({
 
+    getInitialState() {
+        return {
+            error: ""
+        }
+    },
+
     componentDidMount() {
         console.log("Finding songs");
         SongActions.getSong();
     },
 
     addPart() {
-        SongActions.addPart(React.findDOMNode(this.refs.partname).value);
+        if(React.findDOMNode(this.refs.partname).value) {
+            SongActions.addPart(React.findDOMNode(this.refs.partname).value);
+            React.findDOMNode(this.refs.partname).value = "";
+            this.setState({
+                error: ""
+            })
+        }
+        else {
+            this.setState({
+                error: "Du må gi delen et navn"
+            })
+        }
+    },
+
+    checkEnter(e) {
+
+        if(e.key === "Enter") {
+            console.log("Enter");
+            this.addPart();
+        }
     },
 
     render() {
@@ -24,8 +49,9 @@ var Song = React.createClass({
                         <Parts />
                     </AltContainer>
                 </ol>
-                <input ref="partname" />
-                <button onClick={this.addPart}>Legg til del</button>
+                <p>{this.state.error ? this.state.error : ""}</p>
+                <input onKeyPress={this.checkEnter} ref="partname" />
+                <img src="images/glyphicons-433-plus.png" onClick={this.addPart} />
             </div>
         );
     }

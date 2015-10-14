@@ -4,8 +4,7 @@ var Alternative = React.createClass({
 
     getInitialState() {
         return {
-            votes: 0,
-            playtext: "Play",
+            playtext: "images/glyphicons-174-play.png",
             playing: false
         }
     },
@@ -20,13 +19,7 @@ var Alternative = React.createClass({
 
         this.setState( {
             playing: !this.state.playing,
-            playtext: this.state.playing ? "Play":"Pause"
-        });
-    },
-
-    upvote() {
-        this.setState({
-           votes: this.state.votes+1
+            playtext: this.state.playing ? "images/glyphicons-174-play.png":"images/glyphicons-175-pause.png"
         });
     },
 
@@ -34,9 +27,8 @@ var Alternative = React.createClass({
         return (
             <li className="alternative">
                 <audio ref="play" src={this.props.alternative.href}>Hallo</audio>
-                {this.props.alternative.name} - Stemmer: {this.state.votes}
-                <button onClick={this.playPause}>{this.state.playtext}</button>
-                <button onClick={this.upvote}>Upvote</button>
+                {this.props.alternative.name}
+                <img src={this.state.playtext} onClick={this.playPause} />
             </li>
         );
     }
