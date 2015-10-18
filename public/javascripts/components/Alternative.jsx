@@ -39,7 +39,7 @@ var Alternative = React.createClass({
     render() {
         return (
             <li className="alternative">
-                <audio ref="play" src={this.props.alternative.href}>Hallo</audio>
+                <audio preload="none" ref="play" src={this.props.alternative.href}>Hallo</audio>
                 {this.props.alternative.name}
                 <img src={this.state.playtext} onClick={this.playPause} />
                 <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}>Valgt</input>
