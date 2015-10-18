@@ -5,8 +5,21 @@ var Alternative = React.createClass({
     getInitialState() {
         return {
             playtext: "images/glyphicons-174-play.png",
-            playing: false
+            playing: false,
+            selected: false
         }
+    },
+
+    play() {
+        if(this.state.selected) {
+            React.findDOMNode(this.refs.play).play();
+        }
+    },
+
+    setSelected(e) {
+      this.setState({
+         selected: !this.state.selected
+      });
     },
 
     playPause() {
@@ -29,6 +42,7 @@ var Alternative = React.createClass({
                 <audio ref="play" src={this.props.alternative.href}>Hallo</audio>
                 {this.props.alternative.name}
                 <img src={this.state.playtext} onClick={this.playPause} />
+                <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}>Valgt</input>
             </li>
         );
     }

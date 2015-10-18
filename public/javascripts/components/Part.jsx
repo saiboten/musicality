@@ -29,7 +29,7 @@ var Part = React.createClass({
     },
 
     playPart() {
-        console.log(this.refs.instrumentlist);
+        this.refs.instrumentlist.play();
     },
 
     removePart() {

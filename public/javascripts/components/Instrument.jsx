@@ -22,6 +22,10 @@ var Instrument = React.createClass({
         })
     },
 
+    play() {
+      this.refs.alternativelist.play();
+    },
+
     upload() {
         var req = request.post('/upload');
         req.query({ filename: this.state.file.name });
@@ -45,8 +49,6 @@ var Instrument = React.createClass({
                 file: {}
             })
         });
-
-
     },
 
     render() {
@@ -54,7 +56,7 @@ var Instrument = React.createClass({
         return (
             <div className="instrument">
                 <h3>{this.props.instrument.name}</h3>
-                <AlternativeList alternatives={this.props.instrument.alternatives} />
+                <AlternativeList ref="alternativelist" alternatives={this.props.instrument.alternatives} />
                 <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
                     <div>Nytt alternativ</div>
                 </Dropzone>
