@@ -32,6 +32,10 @@ class SongActions {
         this.dispatch(partName);
     }
 
+    removeInstrument(info) {
+        this.dispatch(info);
+    }
+
     removePart(partName) {
         this.dispatch(partName);
     }

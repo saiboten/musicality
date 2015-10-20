@@ -16,6 +16,7 @@ class SongStore {
             handleAddAlternative: SongActions.ADD_ALTERNATIVE,
             handleAddPart: SongActions.ADD_PART,
             handleRemovePart: SongActions.REMOVE_PART,
+            handleRemoveInstrument: SongActions.REMOVE_INSTRUMENT,
             handleAddInstrument: SongActions.ADD_INSTRUMENT
         });
     }
@@ -62,6 +63,27 @@ class SongStore {
             }
             return true;
         });
+        this.updateBackend();
+    }
+
+    handleRemoveInstrument(info) {
+        debug('Removing instrument: ', info);
+        debug('this.parts before: ', this.parts);
+
+        this.parts.forEach(part => {
+
+            debug('part.name, info.partName: ', part.partname, info.partName);
+
+            if(part.partname == info.partName) {
+                debug('part.instruments', part.instruments);
+                part.instruments = part.instruments.filter(instrument => {
+                    debug('instrument.name, info.instrumentName: ', instrument.name, info.instrumentName);
+                    return instrument.name !== info.instrumentName;
+                })
+            }
+        });
+
+        debug('this.parts after: ', this.parts);
         this.updateBackend();
     }
 

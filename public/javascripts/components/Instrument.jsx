@@ -26,6 +26,13 @@ var Instrument = React.createClass({
       this.refs.alternativelist.play();
     },
 
+    removeInstrument() {
+        SongActions.removeInstrument({
+            partName: this.props.part,
+            instrumentName: this.props.instrument.name
+        });
+    },
+
     upload() {
         var req = request.post('/upload');
         req.query({ filename: this.state.file.name });
@@ -51,16 +58,24 @@ var Instrument = React.createClass({
         });
     },
 
+    abortUpload() {
+        this.setState({
+            file: {}
+        })
+    },
+
     render() {
+        var fileupload = <p>Fil som blir lastet opp: {this.state.file.name}<button onClick={this.upload}>Last opp</button><button onClick={this.abortUpload}>Avbryt opplasting</button></p>;
+        var nothing = <span></span>
 
         return (
             <div className="instrument">
-                <h3>{this.props.instrument.name}</h3>
+                <h3>{this.props.instrument.name} <img onClick={this.removeInstrument} src="images/glyphicons-208-remove-2.png" /></h3>
                 <AlternativeList ref="alternativelist" alternatives={this.props.instrument.alternatives} />
                 <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
-                    <div>Nytt alternativ</div>
+                    <div>Klikk/Drop flere spor her</div>
                 </Dropzone>
-                <p>Fil som blir lastet opp: {this.state.file.name}<button onClick={this.upload}>Last opp</button></p>
+                {this.state.file.name ? fileupload : nothing}
             </div>
         );
     }

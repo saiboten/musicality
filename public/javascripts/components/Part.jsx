@@ -65,8 +65,7 @@ var Part = React.createClass({
 
         return (
             <li className="part">
-                <h2>{this.props.part.partname}</h2>
-                <img onClick={this.removePart} src="images/glyphicons-208-remove-2.png" />
+                <h2>{this.props.part.partname} <img onClick={this.removePart} src="images/glyphicons-208-remove-2.png" /></h2>
                 {this.state.removeEnabled ? confirmButton : nothing}
 
                 <InstrumentList ref="instrumentlist" part={this.props.part.partname} instruments={this.props.part.instruments} />

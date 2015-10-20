@@ -11,7 +11,8 @@ var Alternative = React.createClass({
         return {
             playtext: "images/glyphicons-174-play.png",
             playing: false,
-            selected: false
+            selected: false,
+            loaded: false
         }
     },
 
@@ -66,6 +67,9 @@ var Alternative = React.createClass({
                 debug('Song is loaded - and is ready for action!');
                 that.isCreated = true;
                 that.wavesurfer = wavesurfer;
+                that.setState({
+                    loaded: true
+                })
             });
 
         }
@@ -75,11 +79,11 @@ var Alternative = React.createClass({
         return (
             <li className="alternative">
                 <div ref="alternativeAudio"></div>
-                <button onClick={this.setup}>Last låt</button>
+                {this.state.loaded ? <span></span> : <button onClick={this.setup}>Last inn låt</button>}
                 <audio preload="none" ref="play" src={this.props.alternative.href}>Hallo</audio>
                 {this.props.alternative.name}
                 <img src={this.state.playtext} onClick={this.playPause} />
-                <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}>Valgt</input>
+                <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
             </li>
         );
     }
