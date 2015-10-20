@@ -76,14 +76,18 @@ var Alternative = React.createClass({
     },
 
     render() {
+
+        var enabled = <img src={this.state.playtext} onClick={this.playPause} />;
+        var checkbox = <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
+        var disabled = <span></span>;
+
         return (
             <li className="alternative">
                 <div ref="alternativeAudio"></div>
                 {this.state.loaded ? <span></span> : <button onClick={this.setup}>Last inn låt</button>}
-                <audio preload="none" ref="play" src={this.props.alternative.href}>Hallo</audio>
                 {this.props.alternative.name}
-                <img src={this.state.playtext} onClick={this.playPause} />
-                <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
+                {this.state.loaded ? enabled : disabled}
+                {this.state.loaded ? checkbox : disabled}
             </li>
         );
     }
