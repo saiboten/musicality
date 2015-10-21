@@ -87,7 +87,7 @@ var Alternative = React.createClass({
                 container: React.findDOMNode(this.refs.alternativeAudio),
                 waveColor: 'violet',
                 backend: 'MediaElement',
-                height: '50'
+                height: '25'
             });
 
             wavesurfer.load(this.props.alternative.href);
