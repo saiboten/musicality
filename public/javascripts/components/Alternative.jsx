@@ -114,13 +114,15 @@ var Alternative = React.createClass({
             <button onClick={this.adjustOffset.bind(this,0.005)}>++</button>
             <button onClick={this.adjustOffset.bind(this,0.001)}>+</button>
             <button onClick={this.adjustOffset.bind(this,-0.001)}>-</button>
-            <button onClick={this.adjustOffset.bind(this,-0.005)}>--</button><br />{this.props.alternative.name}
+            <button onClick={this.adjustOffset.bind(this,-0.005)}>--</button><br />
         </div>;
 
         return (
             <li className="alternative">
+
                 <div className="audio" ref="alternativeAudio"></div>
                 {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="images/arrows130.svg" alt="Load track" /></button>}
+                {this.props.alternative.name}
             </li>
         );
     }
