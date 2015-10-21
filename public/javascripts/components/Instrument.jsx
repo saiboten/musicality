@@ -26,6 +26,10 @@ var Instrument = React.createClass({
       this.refs.alternativelist.play();
     },
 
+    pause() {
+        this.refs.alternativelist.pause();
+    },
+
     removeInstrument() {
         SongActions.removeInstrument({
             partName: this.props.part,
@@ -70,11 +74,14 @@ var Instrument = React.createClass({
 
         return (
             <div className="instrument">
-                <h3>{this.props.instrument.name} <img onClick={this.removeInstrument} src="images/glyphicons-208-remove-2.png" /></h3>
-                <AlternativeList ref="alternativelist" alternatives={this.props.instrument.alternatives} />
-                <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
-                    <div>Klikk/Drop flere spor her</div>
-                </Dropzone>
+                <h3>{this.props.instrument.name}
+                    <img className="headerButtons" onClick={this.removeInstrument} src="images/glyphicons-208-remove-2.png" />
+                    <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
+                        <img className="headerButtons"  src="images/glyphicons-202-upload.png" />
+                    </Dropzone>
+                </h3>
+                <AlternativeList part={this.props.part} instrument={this.props.instrument.name} ref="alternativelist" alternatives={this.props.instrument.alternatives} />
+
                 {this.state.file.name ? fileupload : nothing}
             </div>
         );

@@ -8,16 +8,18 @@ a {
 }
 
 .dropzone {
-    border: 1px dotted black;
-    width: 150px;
+    //border 1px dotted black;
+    width: 50px;
+    float: right;
 }
 
-.instruments {
-    border: 1px solid black;
+.instrument {
+    //border 1px solid black;
 }
 
 .alternative {
     border: 1px solid black;
+    height: 170px;
 }
 
 .alternativeList {
@@ -28,10 +30,38 @@ a {
     border: 1px solid black;
     width: 300px;
     float: left;
-    height: 600px;
+    padding: 15px;
 }
 
 
 .parts {
     border: 1px solid black;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    padding: 5px;
+}
+
+.guitar {
+    width: 20px;
+    height: 13px;
+}
+
+.load {
+    width: 25px;
+}
+
+.addPart {
+    width: 80%;
+    height: 30px;
+}
+
+.addInstrument {
+    margin: 5px;
 }

@@ -1,19 +1,21 @@
 var React = require('react');
 var InstrumentList = require('./InstrumentList.jsx');
 var SongActions = require('../actions/SongActions');
+var debug = require('debug')('Part');
 
 var Part = React.createClass({
 
     getInitialState() {
         return {
             error: "",
-            removeEnabled: false
+            removeEnabled: false,
+            isPlaying: false
         }
     },
 
     addInstrument() {
         if(React.findDOMNode(this.refs.instrument).value) {
-            console.log("Adding instrument");
+            debug("Adding instrument");
             SongActions.addInstrument({part: this.props.part.partname, instrumentName: React.findDOMNode(this.refs.instrument).value});
             React.findDOMNode(this.refs.instrument).value = "";
             this.setState( {
@@ -28,8 +30,24 @@ var Part = React.createClass({
 
     },
 
-    playPart() {
-        this.refs.instrumentlist.play();
+    playOrPausePart() {
+        debug("Playing/Pausing");
+
+        if(this.state.isPlaying) {
+            debug("Pausing");
+            this.refs.instrumentlist.pause();
+        }
+        else {
+            debug("Playing");
+            this.refs.instrumentlist.play();
+        }
+        var playing = !this.state.isPlaying;
+
+        debug("New state: ", playing);
+
+        this.setState( {
+            isPlaying: playing
+        });
     },
 
     removePart() {
@@ -65,13 +83,14 @@ var Part = React.createClass({
 
         return (
             <li className="part">
-                <h2>{this.props.part.partname} <img onClick={this.removePart} src="images/glyphicons-208-remove-2.png" /></h2>
+                <h2>{this.props.part.partname}
+                    <button className="headerButtons" onClick={this.playOrPausePart}>{this.state.isPlaying ? <img src="/images/glyphicons-175-pause.png" alt="Pause part" /> : <img src="/images/glyphicons-174-play.png" alt="Play part" />}</button>
+                    <button className="headerButtons" onClick={this.removePart}><img src="images/glyphicons-208-remove-2.png" /></button></h2>
                 {this.state.removeEnabled ? confirmButton : nothing}
 
                 <InstrumentList ref="instrumentlist" part={this.props.part.partname} instruments={this.props.part.instruments} />
-                <input ref="instrument" onKeyDown={this.addInstrumentEnter} /><button onClick={this.addInstrument}>Legg til instrument</button>
+                <input className="addInstrument" ref="instrument" onKeyDown={this.addInstrumentEnter} /><button onClick={this.addInstrument}><img src="/images/guitar38.svg" className="guitar" alt="Add instrument"></img></button>
                 <p>{this.state.error ? this.state.error : ""}</p>
-                <button onClick={this.playPart}>Spill del</button>
 
             </li>
         );

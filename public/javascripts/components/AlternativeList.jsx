@@ -4,9 +4,14 @@ var Alternative = require('./Alternative.jsx');
 var AlternativeList = React.createClass({
 
     play() {
-        console.log("refs", this.refs);
         this.props.alternatives.forEach(alternative => {
             this.refs[alternative.name].play();
+        });
+    },
+
+    pause() {
+        this.props.alternatives.forEach(alternative => {
+            this.refs[alternative.name].pause();
         });
     },
 
@@ -16,7 +21,7 @@ var AlternativeList = React.createClass({
         {this.props.alternatives.map((alternative, i) => {
             console.log(alternative);
             return (
-                <Alternative ref={alternative.name} key={alternative.name} alternative={alternative} />
+                <Alternative part={this.props.part} instrument={this.props.instrument} ref={alternative.name} key={alternative.name} alternative={alternative} />
             );
         })}
             </ul>

@@ -8,6 +8,9 @@ var concat = require('gulp-concat');
 var babelify = require('babelify');
 var notify = require("gulp-notify");
 
+var watchLess = require('gulp-watch-less');
+var less = require('gulp-less');
+
 gulp.task('browserify', function() {
     var bundler = browserify({
         entries: ['./public/javascripts/App.jsx'], // Only need initial file, browserify finds the deps
@@ -36,5 +39,14 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./public/build/'));
 });
 
+
+
+gulp.task('less', function () {
+    return gulp.src('public/stylesheets/myfile.less')
+        .pipe(watchLess('public/stylesheets/myfile.less'))
+        .pipe(less())
+        .pipe(gulp.dest('public/stylesheets'));
+});
+
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['browserify'])
+gulp.task('default', ['browserify','less'])

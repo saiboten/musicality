@@ -1,0 +1,11 @@
+.box {
+  color: #f90003;
+  border-color: #ff9394;
+}
+.box div {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.headerButtons {
+  float: right;
+}

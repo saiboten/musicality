@@ -17,13 +17,34 @@ class SongStore {
             handleAddPart: SongActions.ADD_PART,
             handleRemovePart: SongActions.REMOVE_PART,
             handleRemoveInstrument: SongActions.REMOVE_INSTRUMENT,
-            handleAddInstrument: SongActions.ADD_INSTRUMENT
+            handleAddInstrument: SongActions.ADD_INSTRUMENT,
+            adjustOffset: SongActions.ADJUST_OFFSET
         });
     }
 
     handleGetSong() {
         debug("SongStore initialized");
         this.parts = [];
+    }
+
+    adjustOffset(info) {
+        debug('Adjusting offset, info: ', info);
+        var filtered = this.parts.forEach(part=>{
+            if(info.part === part.partname) {
+                debug('Found the part: ', part);
+                part.instruments.forEach(instrument => {
+                    if(instrument.name === info.instrument) {
+                        instrument.alternatives.forEach(alternative => {
+                            if(alternative.name === info.alternative) {
+                                debug('Setting new offset: ', info.offset);
+                                alternative.offset = info.offset;
+                            }
+                        })
+                    }
+                })
+            }
+        });
+        this.updateBackend();
     }
 
     handleUpdateSong(song) {

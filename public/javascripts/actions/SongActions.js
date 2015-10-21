@@ -24,6 +24,10 @@ class SongActions {
         this.dispatch(song);
     }
 
+    adjustOffset(info) {
+        this.dispatch(info)
+    }
+
     addAlternative(alternative) {
         this.dispatch(alternative);
     }

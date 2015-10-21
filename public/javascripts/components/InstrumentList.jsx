@@ -7,7 +7,12 @@ var InstrumentList = React.createClass({
         this.props.instruments.forEach(instrument => {
             this.refs[instrument.name].play();
         })
+    },
 
+    pause() {
+        this.props.instruments.forEach(instrument => {
+            this.refs[instrument.name].pause();
+        })
     },
 
     render() {

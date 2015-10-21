@@ -50,8 +50,10 @@ var Song = React.createClass({
                     </AltContainer>
                 </ol>
                 <p>{this.state.error ? this.state.error : ""}</p>
-                <input onKeyPress={this.checkEnter} ref="partname" />
-                <img src="images/glyphicons-433-plus.png" onClick={this.addPart} />
+                <div className="part">
+                    <input className="addPart" onKeyPress={this.checkEnter} ref="partname" />
+                    <button onClick={this.addPart}><img className="headerButtons" src="images/glyphicons-433-plus.png" /></button>
+                </div>
             </div>
         );
     }

@@ -15,7 +15,8 @@ var songSchema = mongoose.Schema(
                 name: String,
                 alternatives: [{
                     name: String,
-                    href: String
+                    href: String,
+                    offset: Number
                 }]
             }
         ]
