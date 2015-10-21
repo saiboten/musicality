@@ -90,7 +90,7 @@ var Part = React.createClass({
                 {this.state.removeEnabled ? confirmButton : nothing}
 
                 <InstrumentList ref="instrumentlist" part={this.props.part.partname} instruments={this.props.part.instruments} />
-                <input placeholder="Legg til instrument" className="addInstrument" ref="instrument" onKeyDown={this.addInstrumentEnter} /><button onClick={this.addInstrument}><img src="/images/guitar38.svg" className="guitar" alt="Add instrument"></img></button>
+                <input placeholder="Legg til instrument" className="addInstrument" ref="instrument" onKeyDown={this.addInstrumentEnter} /><button className="guitarButton" onClick={this.addInstrument}><img src="/images/guitar38.svg" className="guitar"  alt="Add instrument"></img></button>
                 <p>{this.state.error ? this.state.error : ""}</p>
 
             </li>

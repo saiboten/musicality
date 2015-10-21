@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 100px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -33,6 +33,7 @@ a {
     padding: 15px;
     height: 600px;
     overflow: auto;
+    background-color: #fbfcfc;
 }
 
 
@@ -55,6 +56,12 @@ li {
     height: 13px;
 }
 
+.guitarButton {
+    float: left;
+    height: 35px;
+    margin-top:5px;
+}
+
 .load {
     width: 20px;
 }
@@ -62,10 +69,18 @@ li {
 .addPart {
     width: 80%;
     height: 30px;
+    float: left;
+}
+
+.addPartButton {
+    height: 36px;
 }
 
 .addInstrument {
     margin: 5px;
+    height: 30px;
+    width: 80%;
+    float: left;
 }
 
 .audio {

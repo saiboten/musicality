@@ -51,8 +51,10 @@ var Song = React.createClass({
                 </ol>
                 <p>{this.state.error ? this.state.error : ""}</p>
                 <div className="part">
-                    <input className="addPart" onKeyPress={this.checkEnter} ref="partname" />
-                    <button onClick={this.addPart}><img className="headerButtons" src="images/glyphicons-433-plus.png" /></button>
+                    <h2>Legg til ny del</h2>
+                    <hr></hr>
+                    <input placeholder="Navn på del" className="addPart" onKeyPress={this.checkEnter} ref="partname" />
+                    <button className="addPartButton" onClick={this.addPart}><img className="headerButtons" src="images/glyphicons-433-plus.png" /></button>
                 </div>
             </div>
         );
