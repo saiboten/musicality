@@ -19,7 +19,7 @@ a {
 
 .alternative {
     border: 1px solid black;
-    height: 100px;
+    height: 48px;
 }
 
 .alternativeList {
@@ -31,6 +31,8 @@ a {
     width: 300px;
     float: left;
     padding: 15px;
+    height: 600px;
+    overflow: auto;
 }
 
 
@@ -67,6 +69,8 @@ li {
 }
 
 .audio {
-    height: 50px;
+    height: 28px;
     border: 1px solid black;
+    width: 38%;
+    float: right;
 }
