@@ -86,7 +86,8 @@ var Alternative = React.createClass({
             wavesurfer.init({
                 container: React.findDOMNode(this.refs.alternativeAudio),
                 waveColor: 'violet',
-                backend: 'MediaElement'
+                backend: 'MediaElement',
+                height: '50'
             });
 
             wavesurfer.load(this.props.alternative.href);
@@ -117,7 +118,7 @@ var Alternative = React.createClass({
 
         return (
             <li className="alternative">
-                <div ref="alternativeAudio"></div>
+                <div className="audio" ref="alternativeAudio"></div>
                 {this.state.loaded ? <span></span> : <button className="headerButtons" onClick={this.setup}><img className="load" src="images/arrows130.svg" alt="Load track" /></button>}
                 {this.props.alternative.name}
                 {this.state.loaded ? enabled : disabled}

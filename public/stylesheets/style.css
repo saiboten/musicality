@@ -19,7 +19,7 @@ a {
 
 .alternative {
     border: 1px solid black;
-    height: 170px;
+    height: 100px;
 }
 
 .alternativeList {
@@ -64,4 +64,9 @@ li {
 
 .addInstrument {
     margin: 5px;
+}
+
+.audio {
+    height: 50px;
+    border: 1px solid black;
 }
