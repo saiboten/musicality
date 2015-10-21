@@ -75,7 +75,7 @@ var Instrument = React.createClass({
         return (
             <div className="instrument">
                 <h3>{this.props.instrument.name}
-                    <img className="headerButtons" onClick={this.removeInstrument} src="images/glyphicons-208-remove-2.png" />
+                    <img className="removeInstrument headerButtons" onClick={this.removeInstrument} src="images/glyphicons-208-remove-2.png" />
                     <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
                         <img className="headerButtons"  src="images/glyphicons-202-upload.png" />
                     </Dropzone>

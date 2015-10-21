@@ -106,24 +106,21 @@ var Alternative = React.createClass({
 
 
     render() {
-
-        var enabled = <img src={this.state.playtext} onClick={this.playPause} />;
-        var checkbox = <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
         var disabled = <span></span>;
-        var offsetButtons = <div>{this.props.alternative.offset ? this.props.alternative.offset.toFixed(3) : 0};
+        var enabled = <div>
+            <img src={this.state.playtext} onClick={this.playPause} />
+            <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
+            {this.props.alternative.offset ? this.props.alternative.offset.toFixed(3) : 0};
             <button onClick={this.adjustOffset.bind(this,0.005)}>++</button>
             <button onClick={this.adjustOffset.bind(this,0.001)}>+</button>
             <button onClick={this.adjustOffset.bind(this,-0.001)}>-</button>
-            <button onClick={this.adjustOffset.bind(this,-0.005)}>--</button></div>;
+            <button onClick={this.adjustOffset.bind(this,-0.005)}>--</button><br />{this.props.alternative.name}
+        </div>;
 
         return (
             <li className="alternative">
                 <div className="audio" ref="alternativeAudio"></div>
-                {this.state.loaded ? <span></span> : <button className="headerButtons" onClick={this.setup}><img className="load" src="images/arrows130.svg" alt="Load track" /></button>}
-                {this.props.alternative.name}
-                {this.state.loaded ? enabled : disabled}
-                {this.state.loaded ? checkbox : disabled}
-                {this.state.loaded ? offsetButtons : disabled}
+                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="images/arrows130.svg" alt="Load track" /></button>}
             </li>
         );
     }
