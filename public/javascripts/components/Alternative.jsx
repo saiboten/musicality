@@ -11,7 +11,7 @@ var Alternative = React.createClass({
 
     getInitialState() {
         return {
-            playtext: "images/glyphicons-174-play.png",
+            playtext: "/images/glyphicons-174-play.png",
             playing: false,
             selected: false,
             loaded: false
@@ -121,7 +121,7 @@ var Alternative = React.createClass({
             <li className="alternative">
 
                 <div className="audio" ref="alternativeAudio"></div>
-                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="images/arrows130.svg" alt="Load track" /></button>}
+                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="/images/arrows130.svg" alt="Load track" /></button>}
                 {this.props.alternative.name}
             </li>
         );

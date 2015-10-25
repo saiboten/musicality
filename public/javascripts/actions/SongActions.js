@@ -36,6 +36,18 @@ class SongActions {
         this.dispatch(partName);
     }
 
+    addSong(song) {
+        this.dispatch(song);
+    }
+
+    getSongs() {
+        this.dispatch();
+    }
+
+    updateSongs(songs) {
+        this.dispatch(songs);
+    }
+
     removeInstrument(info) {
         this.dispatch(info);
     }
@@ -51,6 +63,10 @@ class SongActions {
 
     songFailed(errorMessage) {
         this.dispatch(errorMessage);
+    }
+
+    setSongName(songName) {
+        this.dispatch(songName);
     }
 }
 

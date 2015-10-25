@@ -15,6 +15,7 @@ var Song = React.createClass({
     componentDidMount() {
         console.log("Finding songs");
         SongActions.getSong();
+        SongActions.setSongName(MusicalityGlobal.songName);
     },
 
     addPart() {
@@ -43,19 +44,17 @@ var Song = React.createClass({
     render() {
         return (
             <div className="song">
-                <h1>Vintertjern</h1>
-                <ol>
+                <h1>{MusicalityGlobal.songName} </h1><a href="/">Tilbake til sangoversikt</a>
                     <AltContainer store={SongStore}>
                         <Parts />
                     </AltContainer>
-                </ol>
-                <p>{this.state.error ? this.state.error : ""}</p>
-                <div className="part">
-                    <h2>Legg til ny del</h2>
-                    <hr></hr>
-                    <input placeholder="Navn på del" className="addPart" onKeyPress={this.checkEnter} ref="partname" />
-                    <button className="addPartButton" onClick={this.addPart}><img className="headerButtons" src="images/glyphicons-433-plus.png" /></button>
-                </div>
+                    <p>{this.state.error ? this.state.error : ""}</p>
+                    <div className="part">
+                        <h2>Legg til ny del</h2>
+                        <hr></hr>
+                        <input placeholder="Navn på del" className="addPart" onKeyPress={this.checkEnter} ref="partname" />
+                        <button className="addPartButton" onClick={this.addPart}><img className="headerButtons" src="/images/glyphicons-433-plus.png" /></button>
+                    </div>
             </div>
         );
     }

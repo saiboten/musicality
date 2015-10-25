@@ -18,8 +18,14 @@ class SongStore {
             handleRemovePart: SongActions.REMOVE_PART,
             handleRemoveInstrument: SongActions.REMOVE_INSTRUMENT,
             handleAddInstrument: SongActions.ADD_INSTRUMENT,
-            adjustOffset: SongActions.ADJUST_OFFSET
+            adjustOffset: SongActions.ADJUST_OFFSET,
+            setSongName: SongActions.SET_SONG_NAME
         });
+    }
+
+    setSongName(songName) {
+        debug("SongStore initialized");
+        this.songName = songName;
     }
 
     handleGetSong() {
@@ -121,7 +127,7 @@ class SongStore {
 
     updateBackend() {
         console.log("Updating backend");
-        request.put('/song').send({songName: this.songName, parts: this.parts}).end(function(err, res) {
+        request.put('/song/update/'+this.songName).send({parts: this.parts}).end(function(err, res) {
             console.log("Backend updated ?", res, ". Err: " ,err);
         })
     }

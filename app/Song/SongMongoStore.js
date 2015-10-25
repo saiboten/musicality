@@ -30,11 +30,11 @@ db.once('open', function (callback) {
 });
 
 var SongMongoStore = {
-    updateSong(data) {
+    updateSong(songname, data) {
 
         var Song = mongoose.model('Song', songSchema);
 
-        Song.findOne({songName: data.songName}, function (err, doc) {
+        Song.findOne({songName: songname}, function (err, doc) {
             console.log("document to be updated :", doc);
 
             if (doc) {
@@ -43,7 +43,7 @@ var SongMongoStore = {
                 doc.save();
             }
             else {
-                var newSong = new Song({songName: data.songName, parts: data.parts});
+                var newSong = new Song({songName: songname, parts: data.parts});
 
                 newSong.save(function (err, vintertjern) {
                     if (err) return console.error(err);
@@ -55,6 +55,21 @@ var SongMongoStore = {
         });
     },
 
+
+    addSong(songname) {
+
+        var Song = mongoose.model('Song', songSchema);
+        var newSong = new Song({songName: songname, parts: []});
+
+        newSong.save(function (err, storedSong) {
+            if (err) return console.error(err);
+            else {
+                console.log("Saved this one :", storedSong);
+            }
+        });
+    },
+
+
     getSong(name) {
         console.log("Finding song with name ", name);
         return new Promise(function(success, errorCallback) {
@@ -65,6 +80,27 @@ var SongMongoStore = {
                 if(doc) {
                     console.log("Found a document!");;
                     success(doc);
+                }
+                else {
+                    console.log("Error, could not find doc");
+                    errorCallback({error: "Fant ikke noe"});
+                }
+            });
+        });
+    },
+
+    getSongs() {
+        console.log("Finding all songs");
+        return new Promise(function(success, errorCallback) {
+
+            var Song = mongoose.model('Song', songSchema);
+            Song.find({}, function (err, docs) {
+                console.log("Found stuff? ", err, docs);
+                if(docs) {
+                    console.log("Found the songs!");;
+                    success(docs.map(function(song) {
+                        return {name: song.songName};
+                    }));
                 }
                 else {
                     console.log("Error, could not find doc");

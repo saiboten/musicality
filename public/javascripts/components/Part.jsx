@@ -85,7 +85,7 @@ var Part = React.createClass({
             <li className="part">
                 <h2>{this.props.part.partname}
                     <button className="headerButtons" onClick={this.playOrPausePart}>{this.state.isPlaying ? <img src="/images/glyphicons-175-pause.png" alt="Pause part" /> : <img src="/images/glyphicons-174-play.png" alt="Play part" />}</button>
-                    <button className="headerButtons" onClick={this.removePart}><img src="images/glyphicons-208-remove-2.png" /></button></h2>
+                    <button className="headerButtons" onClick={this.removePart}><img src="/images/glyphicons-208-remove-2.png" /></button></h2>
                 <hr />
                 {this.state.removeEnabled ? confirmButton : nothing}
 
