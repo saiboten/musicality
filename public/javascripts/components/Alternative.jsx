@@ -54,7 +54,7 @@ var Alternative = React.createClass({
 
             this.setState( {
                 playing: !this.state.playing,
-                playtext: this.state.playing ? "images/glyphicons-174-play.png":"images/glyphicons-175-pause.png"
+                playtext: this.state.playing ? "/images/glyphicons-174-play.png":"/images/glyphicons-175-pause.png"
             });
         }
     },
