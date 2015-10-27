@@ -76,6 +76,16 @@ var Alternative = React.createClass({
         SongActions.adjustOffset(info)
     },
 
+    deleteAlternative() {
+        var info = {
+            part: this.props.part,
+            instrument: this.props.instrument,
+            alternative: this.props.alternative.name
+        };
+
+        SongActions.removeAlternative(info)
+    },
+
     setup() {
         if(this.isCreated) {
             debug("Already created");
@@ -109,6 +119,7 @@ var Alternative = React.createClass({
         var disabled = <span></span>;
         var enabled = <div>
             <img src={this.state.playtext} onClick={this.playPause} />
+            <img onClick={this.deleteAlternative} src="/images/glyphicons-208-remove-2.png" />
             <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
             {this.props.alternative.offset ? this.props.alternative.offset.toFixed(3) : 0};
             <button onClick={this.adjustOffset.bind(this,0.005)}>++</button>

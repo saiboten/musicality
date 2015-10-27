@@ -19,13 +19,23 @@ class SongStore {
             handleRemoveInstrument: SongActions.REMOVE_INSTRUMENT,
             handleAddInstrument: SongActions.ADD_INSTRUMENT,
             adjustOffset: SongActions.ADJUST_OFFSET,
-            setSongName: SongActions.SET_SONG_NAME
+            setSongName: SongActions.SET_SONG_NAME,
+            removeAlternative: SongActions.REMOVE_ALTERNATIVE
         });
     }
 
     setSongName(songName) {
         debug("SongStore initialized");
         this.songName = songName;
+    }
+
+    removeAlternative(info) {
+        var part = this.findPart(info.part);
+        var instrument = this.findInstrument(part, info.instrument);
+        instrument.alternatives = instrument.alternatives.filter(alternative => {
+            return alternative.name !== info.alternative;
+        })
+        this.updateBackend();
     }
 
     handleGetSong() {
@@ -35,22 +45,39 @@ class SongStore {
 
     adjustOffset(info) {
         debug('Adjusting offset, info: ', info);
-        var filtered = this.parts.forEach(part=>{
-            if(info.part === part.partname) {
-                debug('Found the part: ', part);
-                part.instruments.forEach(instrument => {
-                    if(instrument.name === info.instrument) {
-                        instrument.alternatives.forEach(alternative => {
-                            if(alternative.name === info.alternative) {
-                                debug('Setting new offset: ', info.offset);
-                                alternative.offset = info.offset;
-                            }
-                        })
-                    }
-                })
+        var alternative = this.findAlternative(info.part, info.instrument,info.alternative);
+        alternative.offset = info.offset;
+        this.updateBackend();
+    }
+
+    findAlternative(input_part, input_instrument, input_alternative) {
+        var returnAlternative = undefined;
+
+        var part = this.findPart(input_part);
+        debug('part: ', part);
+        var instrument = this.findInstrument(part, input_instrument);
+        debug('instrument', instrument);
+
+        instrument.alternatives.forEach(alternative => {
+            if (alternative.name === input_alternative) {
+                debug("Is it working?");
+                returnAlternative = alternative;
             }
         });
-        this.updateBackend();
+
+        return returnAlternative;
+    }
+
+    findPart(input_part) {
+        return this.parts.filter(part =>{
+            return input_part === part.partname;
+        }).reduce(init => { return init });
+    }
+
+    findInstrument(part, input_instrument) {
+        return part.instruments.filter(instrument => {
+            return input_instrument === instrument.name;
+        }).reduce(init => { return init; });
     }
 
     handleUpdateSong(song) {

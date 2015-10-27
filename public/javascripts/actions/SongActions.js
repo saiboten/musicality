@@ -5,7 +5,6 @@ var debug = require('debug')('SongActions');
 class SongActions {
 
     getSong() {
-
         debug("Yeah, SongACtions! songs");
         // we dispatch an event here so we can have "loading" state.
         this.dispatch();
@@ -42,6 +41,15 @@ class SongActions {
 
     getSongs() {
         this.dispatch();
+        SongSource.fetchAllSongs()
+            .then((songs) => {
+                // we can access other actions within our action through `this.actions`
+                debug("Got it baby! Got the songs!");
+                this.actions.updateSongs(songs);
+            })
+            .catch((errorMessage) => {
+                this.actions.songFailed(errorMessage);
+            });
     }
 
     updateSongs(songs) {
@@ -49,10 +57,17 @@ class SongActions {
     }
 
     removeInstrument(info) {
+        debug("Dispatching remove instrument");
+        this.dispatch(info);
+    }
+
+    removeAlternative(info) {
+        debug("Dispatching remove alternative");
         this.dispatch(info);
     }
 
     removePart(partName) {
+        debug("Dispatching remove part");
         this.dispatch(partName);
     }
 
