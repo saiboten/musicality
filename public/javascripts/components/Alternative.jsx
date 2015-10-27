@@ -132,7 +132,7 @@ var Alternative = React.createClass({
             <li className="alternative">
 
                 <div className="audio" ref="alternativeAudio"></div>
-                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="/images/arrows130.svg" alt="Load track" /></button>}
+                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="/images/arrows130.svg" alt="Load track" /><img onClick={this.deleteAlternative} src="/images/glyphicons-208-remove-2.png" /></button>}
                 {this.props.alternative.name}
             </li>
         );
