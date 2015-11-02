@@ -53,6 +53,7 @@ class SongActions {
     }
 
     updateSongs(songs) {
+        debug("Updating songs to ", songs);
         this.dispatch(songs);
     }
 
@@ -64,6 +65,11 @@ class SongActions {
     removeAlternative(info) {
         debug("Dispatching remove alternative");
         this.dispatch(info);
+    }
+
+    removeSong(songName) {
+        debug("Dispatching song name: ", songName);
+        this.dispatch(songName);
     }
 
     removePart(partName) {

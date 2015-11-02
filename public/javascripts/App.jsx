@@ -1,6 +1,6 @@
 var React = require('react');
 var Song = require('./components/Song.jsx');
-var SongSelector = require('./components/SongSelector.jsx');
+var SongSelector = require('./components/SongSelector/SongSelector.jsx');
 
 if(document.getElementById('ReactApp')) {
     console.log("React app found, yeah!");

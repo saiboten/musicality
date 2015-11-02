@@ -10,14 +10,31 @@ class SongsStore {
         this.bindListeners({
             handleAddSong: SongActions.ADD_SONG,
             handleUpdateSongs: SongActions.UPDATE_SONGS,
-            handleGetSongs: SongActions.GET_SONGS
+            handleGetSongs: SongActions.GET_SONGS,
+            handleRemoveSong: SongActions.REMOVE_SONG
+
+        });
+    }
+
+    handleRemoveSong(songName) {
+
+        debug("Song to be removed ", songName);
+        var that = this;
+
+        this.songs = this.songs.filter(song => {
+            return song !== songName;
+        });
+
+        request.del('/song/' + songName).end(function(err, res) {
+            console.log("Song deleted ?", res, ". Err: " ,err);
+            SongActions.getSongs();
         });
     }
 
     handleGetSongs() {
         var that = this;
         request.get('/get_songs').end(function(err, res) {
-            console.log("Backend updated ?", res, ". Err: " ,err);
+            console.log("Did we get some songs updated ?", res, ". Err: " ,err);
             SongActions.updateSongs(res.body.songs);
         });
     }
@@ -32,6 +49,7 @@ class SongsStore {
 
         request.put('/song/new/' + song).end(function(err, res) {
             console.log("Backend updated ?", res, ". Err: " ,err);
+            SongActions.getSongs();
         })
     }
 }

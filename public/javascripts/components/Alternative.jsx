@@ -14,7 +14,8 @@ var Alternative = React.createClass({
             playtext: "/images/glyphicons-174-play.png",
             playing: false,
             selected: false,
-            loaded: false
+            loaded: false,
+            deleteConfirm: false
         }
     },
 
@@ -76,6 +77,25 @@ var Alternative = React.createClass({
         SongActions.adjustOffset(info)
     },
 
+    delete() {
+        debug("DELETE WTF???");
+        if(this.state.deleteConfirm) {
+            this.deleteAlternative();
+        }
+        else {
+            this.setState({
+                deleteConfirm: true
+            });
+        }
+    },
+
+    cancel() {
+        this.setState({
+            deleteConfirm: false
+        });
+
+    },
+
     deleteAlternative() {
         var info = {
             part: this.props.part,
@@ -116,10 +136,11 @@ var Alternative = React.createClass({
 
 
     render() {
+        var cancel = <button onClick={this.cancel}>Cancel</button>;
         var disabled = <span></span>;
         var enabled = <div>
             <img src={this.state.playtext} onClick={this.playPause} />
-            <img onClick={this.deleteAlternative} src="/images/glyphicons-208-remove-2.png" />
+            <img onClick={this.delete} src="/images/glyphicons-208-remove-2.png" />{this.state.deleteConfirm ? cancel:""}
             <input type="checkbox" checked={this.state.selected} onChange={this.setSelected}></input>
             {this.props.alternative.offset ? this.props.alternative.offset.toFixed(3) : 0};
             <button onClick={this.adjustOffset.bind(this,0.005)}>++</button>
@@ -132,7 +153,7 @@ var Alternative = React.createClass({
             <li className="alternative">
 
                 <div className="audio" ref="alternativeAudio"></div>
-                {this.state.loaded ? enabled : <button className="loadButton headerButtons" onClick={this.setup}><img className="load" src="/images/arrows130.svg" alt="Load track" /><img onClick={this.deleteAlternative} src="/images/glyphicons-208-remove-2.png" /></button>}
+                {this.state.loaded ? enabled : <span><img onClick={this.setup} className="load" src="/images/arrows130.svg" alt="Load track" /> <img onClick={this.delete} src="/images/glyphicons-208-remove-2.png" />{this.state.deleteConfirm ? cancel:""}</span>}
                 {this.props.alternative.name}
             </li>
         );

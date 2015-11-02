@@ -12,6 +12,10 @@ var SongService = {
         SongMongoStore.addSong(songName);
     },
 
+    deleteSong(songName) {
+        SongMongoStore.deleteSong(songName);
+    },
+
     getSong(name) {
         console.log("SongService:: Finding song :", name);
         return SongMongoStore.getSong(name);

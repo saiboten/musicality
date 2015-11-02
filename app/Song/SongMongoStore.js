@@ -69,6 +69,12 @@ var SongMongoStore = {
         });
     },
 
+    deleteSong(songname) {
+        var Song = mongoose.model('Song', songSchema);
+        Song.findOne({songName: songname}).remove((err, doc) => {
+            console.log("Removed? ", err, doc);
+        });
+    },
 
     getSong(name) {
         console.log("Finding song with name ", name);

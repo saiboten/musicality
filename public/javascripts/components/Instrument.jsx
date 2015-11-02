@@ -12,7 +12,10 @@ var Instrument = React.createClass({
     },
 
     getInitialState() {
-        return {file: {}}
+        return {
+            file: {},
+            confirmDelete: false
+        }
     },
 
     onDrop: function (files) {
@@ -28,6 +31,23 @@ var Instrument = React.createClass({
 
     pause() {
         this.refs.alternativelist.pause();
+    },
+
+    delete(){
+        if(this.state.confirmDelete) {
+            this.removeInstrument();
+        }
+        else {
+            this.setState( {
+                confirmDelete: true
+            });
+        }
+    },
+
+    cancel() {
+        this.setState( {
+            confirmDelete: false
+        });
     },
 
     removeInstrument() {
@@ -70,12 +90,13 @@ var Instrument = React.createClass({
 
     render() {
         var fileupload = <p>Fil som blir lastet opp: {this.state.file.name}<button onClick={this.upload}>Last opp</button><button onClick={this.abortUpload}>Avbryt opplasting</button></p>;
-        var nothing = <span></span>
+        var nothing = <span></span>;
+        var cancel = this.state.confirmDelete ? <button className="headerButtons" onClick={this.cancel}>Avbryt</button> : "";
 
         return (
             <div className="instrument">
                 <h3>{this.props.instrument.name}
-                    <img className="removeInstrument headerButtons" onClick={this.removeInstrument} src="/images/glyphicons-208-remove-2.png" />
+                    <img className="removeInstrument headerButtons" onClick={this.delete} src="/images/glyphicons-208-remove-2.png" />{cancel}
                     <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
                         <img className="headerButtons"  src="/images/glyphicons-202-upload.png" />
                     </Dropzone>

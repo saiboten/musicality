@@ -42,6 +42,11 @@ router.put('/song/new/:songname', function (req, res) {
     res.status(202).end();
 });
 
+router.delete('/song/:songname', function (req, res) {
+    SongService.deleteSong(req.params.songname);
+    res.status(202).end();
+});
+
 router.get('/song/:songName', function (req, res) {
     res.render('song', { songName: req.params.songName });
 });
